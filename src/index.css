@@ -1,1 +1,14 @@
- 
+ [data-theme="light"] {
+  --bg: #ffffff;
+  --text: #111111;
+}
+
+[data-theme="dark"] {
+  --bg: #111111;
+  --text: #f0f0f0;
+}
+
+body {
+  background: var(--bg);
+   color: var(--text);
+}
