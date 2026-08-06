@@ -1,6 +1,5 @@
-import { summary, monthlyRevenue, salesByCategory } from '../data/Mockdata';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-
+import { summary, monthlyRevenue, salesByCategory, userDistribution } from '../data/mockData';
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 export function Dashboard() {
   return (
     <div>
@@ -44,6 +43,18 @@ export function Dashboard() {
           </BarChart>
         </ResponsiveContainer>
       </div>
+      <div style={{ marginTop: "24px", border: "1px solid #ccc", padding: "16px" }}>
+  <h3>User Distribution</h3>
+  <ResponsiveContainer width="100%" height={250}>
+    <PieChart>
+      <Tooltip />
+      <Pie data={userDistribution} dataKey="value" nameKey="label" outerRadius={80}>
+        <Cell fill="#0f766e" />
+        <Cell fill="#f59e0b" />
+      </Pie>
+    </PieChart>
+  </ResponsiveContainer>
+</div>
     </div>
   );
 }

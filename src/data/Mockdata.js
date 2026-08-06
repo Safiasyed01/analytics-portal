@@ -27,3 +27,8 @@ export const salesByCategory = [
   { category: "Food", value: 3100 },
   { category: "Books", value: 2000 },
 ];
+
+export const userDistribution = [
+  { label: "Active", value: 2 },
+  { label: "Inactive", value: 1 },
+];
