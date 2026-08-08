@@ -14,6 +14,7 @@ body {
   --text: #171b24;
   --text-muted: #6b7280;
   --accent: #0f766e;
+  --accent-soft: #e6f4f2;
 }
 
 [data-theme="dark"] {
@@ -23,9 +24,65 @@ body {
   --text: #e7eaf0;
   --text-muted: #8a93a6;
   --accent: #2dd4bf;
+  --accent-soft: #10262a;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 16px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+
+.input,
+.select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+th {
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
 }

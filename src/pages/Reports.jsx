@@ -5,6 +5,8 @@ export function Reports() {
   const [search, setSearch] = useState("");
   const [country, setCountry] = useState("all");
   const [status, setStatus] = useState("all");
+  const [sortBy, setSortBy] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   const filteredUsers = users.filter((u) => {
     const matchesSearch = u.name.toLowerCase().includes(search.toLowerCase());
@@ -12,9 +14,6 @@ export function Reports() {
     const matchesStatus = status === "all" || u.status === status;
     return matchesSearch && matchesCountry && matchesStatus;
   });
-
-  const [sortBy, setSortBy] = useState(null);
-  const [sortDirection, setSortDirection] = useState("asc");
 
   function handleSort(column) {
     if (sortBy === column) {
@@ -37,39 +36,48 @@ export function Reports() {
       : String(valB).localeCompare(String(valA));
   });
 
+  function sortArrow(column) {
+    if (sortBy !== column) return "";
+    return sortDirection === "asc" ? " ↑" : " ↓";
+  }
+
   return (
     <div>
-      <h1>Reports</h1>
+      <h1 className="page-title">Reports</h1>
 
-      <input
-        type="text"
-        placeholder="Search by name..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div style={{ display: "flex", gap: "10px", marginBottom: "16px" }}>
+        <input
+          className="input"
+          type="text"
+          placeholder="Search by name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <select className="select" value={country} onChange={(e) => setCountry(e.target.value)}>
+          <option value="all">All Countries</option>
+          {countries.map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+        </select>
+        <select className="select" value={status} onChange={(e) => setStatus(e.target.value)}>
+          <option value="all">All Statuses</option>
+          {statuses.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+        <div style={{ marginLeft: "auto", alignSelf: "center", fontSize: "12.5px", color: "var(--text-muted)" }}>
+          {sortedUsers.length} of {users.length}
+        </div>
+      </div>
 
-      <select value={country} onChange={(e) => setCountry(e.target.value)}>
-        <option value="all">All Countries</option>
-        {countries.map((c) => (
-          <option key={c} value={c}>{c}</option>
-        ))}
-      </select>
-
-      <select value={status} onChange={(e) => setStatus(e.target.value)}>
-        <option value="all">All Statuses</option>
-        {statuses.map((s) => (
-          <option key={s} value={s}>{s}</option>
-        ))}
-      </select>
-
-      <table border="1" cellPadding="8">
+      <table>
         <thead>
           <tr>
-            <th onClick={() => handleSort("name")} style={{ cursor: "pointer" }}>Name</th>
-            <th onClick={() => handleSort("country")} style={{ cursor: "pointer" }}>Country</th>
-            <th onClick={() => handleSort("orders")} style={{ cursor: "pointer" }}>Orders</th>
-            <th onClick={() => handleSort("revenue")} style={{ cursor: "pointer" }}>Revenue</th>
-            <th onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>Status</th>
+            <th onClick={() => handleSort("name")}>Name{sortArrow("name")}</th>
+            <th onClick={() => handleSort("country")}>Country{sortArrow("country")}</th>
+            <th onClick={() => handleSort("orders")}>Orders{sortArrow("orders")}</th>
+            <th onClick={() => handleSort("revenue")}>Revenue{sortArrow("revenue")}</th>
+            <th onClick={() => handleSort("status")}>Status{sortArrow("status")}</th>
           </tr>
         </thead>
         <tbody>
@@ -79,7 +87,18 @@ export function Reports() {
               <td>{u.country}</td>
               <td>{u.orders}</td>
               <td>${u.revenue.toLocaleString()}</td>
-              <td>{u.status}</td>
+              <td>
+                <span style={{
+                  padding: "2px 9px",
+                  borderRadius: "999px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: u.status === "Active" ? "var(--accent)" : "var(--text-muted)",
+                  background: u.status === "Active" ? "var(--accent-soft)" : "var(--border)",
+                }}>
+                  {u.status}
+                </span>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,60 +1,63 @@
 import { summary, monthlyRevenue, salesByCategory, userDistribution } from '../data/mockData';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+
 export function Dashboard() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1 className="page-title">Dashboard</h1>
 
       <div style={{ display: "flex", gap: "16px" }}>
-        <div style={{ border: "1px solid #ccc", padding: "16px" }}>
-          <div>Revenue</div>
-          <strong>${summary.revenue.toLocaleString()}</strong>
+        <div className="card" style={{ flex: 1 }}>
+          <div style={{ color: "var(--text-muted)", fontSize: 12 }}>Revenue</div>
+          <strong style={{ fontSize: 22 }}>${summary.revenue.toLocaleString()}</strong>
         </div>
-        <div style={{ border: "1px solid #ccc", padding: "16px" }}>
-          <div>Orders</div>
-          <strong>{summary.orders}</strong>
+        <div className="card" style={{ flex: 1 }}>
+          <div style={{ color: "var(--text-muted)", fontSize: 12 }}>Orders</div>
+          <strong style={{ fontSize: 22 }}>{summary.orders}</strong>
         </div>
-        <div style={{ border: "1px solid #ccc", padding: "16px" }}>
-          <div>Customers</div>
-          <strong>{summary.customers}</strong>
+        <div className="card" style={{ flex: 1 }}>
+          <div style={{ color: "var(--text-muted)", fontSize: 12 }}>Customers</div>
+          <strong style={{ fontSize: 22 }}>{summary.customers}</strong>
         </div>
       </div>
 
-      <div style={{ marginTop: "24px", border: "1px solid #ccc", padding: "16px" }}>
-        <h3>Revenue Trend</h3>
+      <div className="card" style={{ marginTop: "20px" }}>
+        <h3 style={{ marginTop: 0 }}>Revenue Trend</h3>
         <ResponsiveContainer width="100%" height={250}>
           <LineChart data={monthlyRevenue}>
-            <XAxis dataKey="month" />
-            <YAxis />
+            <XAxis dataKey="month" stroke="var(--text-muted)" />
+            <YAxis stroke="var(--text-muted)" />
             <Tooltip />
-            <Line type="monotone" dataKey="value" stroke="#0f766e" />
+            <Line type="monotone" dataKey="value" stroke="#0f766e" strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      <div style={{ marginTop: "24px", border: "1px solid #ccc", padding: "16px" }}>
-        <h3>Sales by Category</h3>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={salesByCategory}>
-            <XAxis dataKey="category" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="value" fill="#0f766e" />
-          </BarChart>
-        </ResponsiveContainer>
+      <div style={{ display: "flex", gap: "16px", marginTop: "20px" }}>
+        <div className="card" style={{ flex: 1.2 }}>
+          <h3 style={{ marginTop: 0 }}>Sales by Category</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <BarChart data={salesByCategory}>
+              <XAxis dataKey="category" stroke="var(--text-muted)" />
+              <YAxis stroke="var(--text-muted)" />
+              <Tooltip />
+              <Bar dataKey="value" fill="#0f766e" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="card" style={{ flex: 1 }}>
+          <h3 style={{ marginTop: 0 }}>User Distribution</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Tooltip />
+              <Pie data={userDistribution} dataKey="value" nameKey="label" outerRadius={80}>
+                <Cell fill="#0f766e" />
+                <Cell fill="#f59e0b" />
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-      <div style={{ marginTop: "24px", border: "1px solid #ccc", padding: "16px" }}>
-  <h3>User Distribution</h3>
-  <ResponsiveContainer width="100%" height={250}>
-    <PieChart>
-      <Tooltip />
-      <Pie data={userDistribution} dataKey="value" nameKey="label" outerRadius={80}>
-        <Cell fill="#0f766e" />
-        <Cell fill="#f59e0b" />
-      </Pie>
-    </PieChart>
-  </ResponsiveContainer>
-</div>
     </div>
   );
 }

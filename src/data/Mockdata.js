@@ -39,13 +39,21 @@ export const userDistribution = [
   { label: "Active", value: users.filter((u) => u.status === "Active").length },
   { label: "Inactive", value: users.filter((u) => u.status === "Inactive").length },
 ];
-export const products = [
-  { id: "PRD-1", name: "Laptop Pro 14", category: "Electronics", price: 1299, stock: 12, description: "High-performance laptop for professionals." },
-  { id: "PRD-2", name: "Wireless Earbuds", category: "Electronics", price: 89, stock: 40, description: "Noise-cancelling wireless earbuds." },
-  { id: "PRD-3", name: "Denim Jacket", category: "Clothes", price: 65, stock: 20, description: "Classic fit denim jacket." },
-  { id: "PRD-4", name: "Running Shoes", category: "Clothes", price: 75, stock: 0, description: "Lightweight running shoes." },
-  { id: "PRD-5", name: "Organic Honey", category: "Food", price: 15, stock: 30, description: "Pure organic honey, 500g jar." },
-  { id: "PRD-6", name: "Clean Code", category: "Books", price: 35, stock: 8, description: "A handbook of agile software craftsmanship." },
-];
-
 export const productCategories = ["Electronics", "Clothes", "Food", "Books"];
+const productNames = {
+  Electronics: ["Laptop Pro 14", "Wireless Earbuds", "4K Monitor", "Smart Watch", "Bluetooth Speaker", "Mechanical Keyboard"],
+  Clothes: ["Denim Jacket", "Running Shoes", "Cotton Hoodie", "Formal Shirt", "Wool Sweater", "Leather Belt"],
+  Food: ["Organic Honey", "Roasted Coffee Beans", "Herbal Tea Set", "Almond Butter", "Dark Chocolate Box", "Granola Pack"],
+  Books: ["Clean Code", "Atomic Habits", "Sapiens", "Deep Work", "The Pragmatic Programmer", "Thinking Fast and Slow"],
+};
+
+export const products = productCategories.flatMap((category) =>
+  productNames[category].map((name, i) => ({
+    id: `PRD-${category}-${i}`,
+    name,
+    category,
+    price: 15 + ((name.length * 7) % 180),
+    stock: (name.length * 3) % 55,
+    description: `${name} — a top-performing ${category.toLowerCase()} item.`,
+  }))
+);
