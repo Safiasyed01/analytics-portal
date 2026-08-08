@@ -5,31 +5,28 @@ export function Settings() {
 
   return (
     <div>
-      <h1>Settings</h1>
+      <h1 className="page-title">Settings</h1>
 
-      <div style={{ marginBottom: "16px" }}>
-        <label>
-          Theme: {theme}
-          <button onClick={toggleTheme} style={{ marginLeft: "8px" }}>
+      <div className="card" style={{ maxWidth: "420px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid var(--border)" }}>
+          <span>Theme: {theme === "light" ? "Light" : "Dark"}</span>
+          <button onClick={toggleTheme}>
             Switch to {theme === "light" ? "dark" : "light"}
           </button>
-        </label>
-      </div>
+        </div>
 
-      <div style={{ marginBottom: "16px" }}>
-        <label>
-          Language:
-          <select style={{ marginLeft: "8px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid var(--border)" }}>
+          <span>Language</span>
+          <select className="select">
             <option>English</option>
             <option>Urdu</option>
           </select>
-        </label>
-      </div>
+        </div>
 
-      <div style={{ marginBottom: "16px" }}>
-        <label>
-          <input type="checkbox" defaultChecked /> Email notifications
-        </label>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0" }}>
+          <span>Email notifications</span>
+          <input type="checkbox" defaultChecked />
+        </div>
       </div>
     </div>
   );

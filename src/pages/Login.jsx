@@ -16,18 +16,37 @@ export function Login() {
   }
 
   return (
-    <div style={{ maxWidth: "320px", margin: "80px auto", border: "1px solid #ccc", padding: "24px" }}>
-      <h1>Enterprise Analytics Portal</h1>
-      <form onSubmit={handleSubmit}>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--bg)" }}>
+      <form onSubmit={handleSubmit} className="card" style={{ width: "320px" }}>
+        <h2 style={{ textAlign: "center", marginTop: 0 }}>Enterprise Analytics Portal</h2>
+
         <div style={{ marginBottom: "12px" }}>
-          <label>Email</label><br />
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: "100%" }} />
+          <label style={{ fontSize: "13px", color: "var(--text-muted)" }}>Email</label>
+          <input
+            className="input"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ width: "100%", marginTop: "4px" }}
+          />
         </div>
-        <div style={{ marginBottom: "12px" }}>
-          <label>Password</label><br />
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: "100%" }} />
+
+        <div style={{ marginBottom: "16px" }}>
+          <label style={{ fontSize: "13px", color: "var(--text-muted)" }}>Password</label>
+          <input
+            className="input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ width: "100%", marginTop: "4px" }}
+          />
         </div>
-        <button type="submit">Login</button>
+
+        <button type="submit" style={{ width: "100%" }}>Login</button>
+
+        <p style={{ fontSize: "11px", color: "var(--text-muted)", textAlign: "center", marginBottom: 0 }}>
+          Demo only — any email and password works.
+        </p>
       </form>
     </div>
   );
